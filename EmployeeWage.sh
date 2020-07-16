@@ -20,12 +20,16 @@ function getWorkingHrs() {
 	echo $workingHrs
 }
 
+declare -i dailyWages
 while [ $totalWorkingHrs -lt $workHrsPerMonth ] && [ $totalWorkingDays -lt $workingDaysPerMonth ]
 do
 	((totalWorkingDays++))
 	workingHrs="$( getWorkingHrs $((RANDOM%3)) )"
 	totalWorkingHrs=$(($totalWorkingHrs+$workingHrs))
+	dailyWages[$totalWorkingDays]=$(( $WorkingHrs*$wagePerHrs))
 done
 
 empTotalWage=$(( $totalWorkingHrs*$wagePerHrs ))
 echo "total wage of the employee : " $empTotalWage
+echo "Day : " ${!dailyWages[@]}
+echo "DailyWage : " ${dailyWages[@]}
