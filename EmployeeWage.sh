@@ -9,16 +9,22 @@ workHrsPerMonth=0
 totalWorkingDays=0
 totalWorkingHrs=0
 
-while [ $totalWorkingHrs -lt $workHrsPerMonth ] && [ $totalWorkingDays -lt $workDaysPerMonth ]
-do
-	((totalWorkingDays++))
-	empPresent=$((RANDOM%3))
-	case $empPresent in
+function getWorkingHrs() {
+
+	case $1 in
 		$isFullTime) workingHrs=8;;
 		$isPartTime) workingHrs=4;;
 		          *) workingHrs=0;;
 	esac
-	totalWorkingHrs=$(( $totalWorkingHrs+$workingHrs ))
+	
+	echo $workingHrs
+}
+
+while [ $totalWorkingHrs -lt $workHrsPerMonth ] && [ $totalWorkingDays -lt $workingDaysPerMonth ]
+do
+	((totalWorkingDays++))
+	workingHrs="$( getWorkingHrs $((RANDOM%3)) )"
+	totalWorkingHrs=$(($totalWorkingHrs+$workingHrs))
 done
 
 empTotalWage=$(( $totalWorkingHrs*$wagePerHrs ))
