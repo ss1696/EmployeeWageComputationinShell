@@ -6,12 +6,12 @@ isPartTime=1
 
 empPresent=$((RANDON%3))
 
-if [ $empPresent -eq $isFullTime ]
-then
-	workingHrs=8
-elif [ $empPresent -eq $isPartTime ]
-then
-	workingHrs=4
-else
-	workingHrs=0
-fi
+case $empPresent in
+	
+	isFullTime) workingHrs=8;;
+	isPartTime) workingHrs=4;;
+		 *) workingHrs=0;;
+esac
+
+empDailyWage=$(( $wagePerHrs*$workingHrs ))
+echo "1day wage of a employee : " $empDailyWage 
