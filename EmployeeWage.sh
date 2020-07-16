@@ -1,17 +1,17 @@
 #!/bin/bash
 
 wagePerHrs=20
+isFullTime=2
+isPartTime=1
 
 empPresent=$((RANDON%3))
 
-if [ $empPresent -eq 2 ]
+if [ $empPresent -eq $isFullTime ]
 then
-	echo "employee is Present"
 	workingHrs=8
+elif [ $empPresent -eq $isPartTime ]
+then
+	workingHrs=4
 else
-	echo "employee is Absent"
 	workingHrs=0
 fi
-
-empDailyWage=$(( $wagePerHrs*$workingHrs))
-echo "1 day wage of the employee : " $empDailyWage
